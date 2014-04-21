@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div class="pane-root">
+    </div>
+
+    <script src="lib/d3.v3.min.js"></script>
+    <script src="videopane.js"></script>
+    <script src="commandcenter.js"></script>
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var scripts = document.getElementsByTagName('script');
+      var lastScriptTag = scripts[scripts.length - 1];
+      lastScriptTag.parentNode.appendChild(tag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.    
+      function onYouTubeIframeAPIReady() {
+        var commandCenter = createCommandCenter({
+          paneRoot: d3.select('.pane-root')          
+        });
+        commandCenter.createPanes({
+          videos: [
+            {
+              id: 'devvideo',
+              youtubeId: 'M7lc1UVf-VE'
+            },
+            {
+              id: 'cubsintro',
+              youtubeId: 'T5_ZwCZsGyw',
+            },
+            {
+              id: 'ogrebattle',
+              youtubeId: '0hy3mpWlGDs'
+            }
+          ]
+        });
+      }
+    </script>
+  </body>
+</html>
